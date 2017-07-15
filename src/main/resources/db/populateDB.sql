@@ -9,6 +9,6 @@ INSERT INTO companies(name, earnings, parent_id)
             ('Roshen 3', 11000, 102),
             ('Roshen 4', 5000, 103),
             ('Konti', 13000, NULL),
-            ('Konti 1', 10000, 104),
+            ('Konti 1', 10000, 105),
             ('Konti 2', 8000, 105),
             ('AVK', 16000, NULL);

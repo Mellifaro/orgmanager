@@ -77,12 +77,17 @@ public class Company implements Serializable{
 
         Company company = (Company) o;
 
-        return id.equals(company.id);
+        if (!id.equals(company.id)) return false;
+        if (!name.equals(company.name)) return false;
+        return earnings.equals(company.earnings);
 
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + earnings.hashCode();
+        return result;
     }
 }
