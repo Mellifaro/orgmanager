@@ -15,13 +15,18 @@ import java.util.List;
  * Created by Виктор on 14.07.2017.
  */
 @Controller
-@RequestMapping("/companies")
 public class RootController {
 
     @Autowired
     private CompanyService companyService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    //redirecting main page to companies
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String redirectToCompanies(ModelMap model){
+        return "redirect:/companies";
+    }
+
+    @RequestMapping(value = "/companies", method = RequestMethod.GET)
     public String getAllCompanies(ModelMap model){
         return "companies";
     }

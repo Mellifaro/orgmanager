@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Created by Виктор on 15.07.2017.
  */
+//This class is necessary to receive all tree structures with total earnings
 public class CompanyWithChildrenDTO implements Serializable{
     private static final long serialVersionUID = 4360395719334854363L;
 

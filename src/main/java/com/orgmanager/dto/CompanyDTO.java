@@ -13,6 +13,7 @@ import java.io.Serializable;
 /**
  * Created by Виктор on 15.07.2017.
  */
+//This dto is necessary to receive single company to edit it
 public class CompanyDTO implements Serializable{
     private static final long serialVersionUID = 4360395719334854364L;
 
