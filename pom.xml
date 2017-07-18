@@ -32,6 +32,7 @@
         <!--Webjars-->
         <webjars-bootstrap.version>3.3.6</webjars-bootstrap.version>
         <webjars-jquery.version>2.2.4</webjars-jquery.version>
+        <webjars-noty.version>2.3.8</webjars-noty.version>
     </properties>
 
     <dependencies>
@@ -154,6 +155,11 @@
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>${webjars-jquery.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>noty</artifactId>
+            <version>${webjars-noty.version}</version>
         </dependency>
     </dependencies>
 

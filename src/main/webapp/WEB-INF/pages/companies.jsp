@@ -14,7 +14,7 @@
     <div class="container">
         <div class="shadow">
             <div class="view-box">
-                <a class="btn btn-sm btn-info" onclick="addCompany('Add main company')" >Add main company</a>
+                <a class="btn btn-sm btn-info" onclick="addCompany(null)" >Add main company</a>
 
                 <table class="table display" id="datatable">
                     <thead>
@@ -58,7 +58,7 @@
                             <label for="earnings" class="control-label col-xs-3">Earnings</label>
 
                             <div class="col-xs-9">
-                                <input type="text" class="form-control" id="earnings" name="earnings" placeholder="Earnings">
+                                <input type="number" class="form-control" id="earnings" name="earnings" placeholder="Earnings">
                             </div>
                         </div>
 
@@ -75,6 +75,7 @@
 
     <script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
     <script type="text/javascript" src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
     <script type="text/javascript" src="resources/js/companyUtil.js"></script>
 </body>
 

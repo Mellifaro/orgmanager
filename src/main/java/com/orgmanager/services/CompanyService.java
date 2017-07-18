@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface CompanyService {
 
-    Company find(Integer id);
+    Company find(Long id);
 
     List<CompanyWithChildrenDTO> findAllParentCompanies();
 
-    void delete(Integer id);
+    void delete(Long id);
 
     void updateFromDto(CompanyDTO companyDTO);
 }

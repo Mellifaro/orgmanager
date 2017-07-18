@@ -5,6 +5,7 @@ import com.orgmanager.config.ServicesAppConfig;
 import com.orgmanager.dto.CompanyWithChildrenDTO;
 import com.orgmanager.models.Company;
 import com.orgmanager.services.CompanyService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,13 @@ public class CompanyServiceTest {
 
     @Test
     public void testGet(){
-        Company found = service.find(100);
+        Company found = service.find(100L);
+        Assert.assertNotNull(found);
     }
 
     @Test
     public void testGetAllParents(){
         List<CompanyWithChildrenDTO> companyList = service.findAllParentCompanies();
+        Assert.assertEquals(3, companyList.size());
     }
 }

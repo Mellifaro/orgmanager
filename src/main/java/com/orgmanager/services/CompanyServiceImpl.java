@@ -21,7 +21,7 @@ public class CompanyServiceImpl implements CompanyService{
     private CompanyRepository repository;
 
     @Override
-    public Company find(Integer id) {
+    public Company find(Long id) {
         Company company = repository.findOne(id);
         return repository.findOne(id);
     }
@@ -50,7 +50,7 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         repository.delete(id);
     }
 }

@@ -3,6 +3,10 @@ var form;
 $(document).ready(function() {
     form = $('#detailsForm');
 
+    $(document).ajaxError(function (event, jqXHR, options, jsExc) {
+        failNoty(event, jqXHR, options, jsExc);
+    });
+
     updateTable();
     form.submit(function () {
         save();
@@ -89,6 +93,7 @@ function save(){
         success: function () {
             $('#editRow').modal('hide');
             updateTable();
+            successNoty('Saved');
         }
     });
 }
@@ -99,6 +104,35 @@ function deleteRow(id) {
         type: 'DELETE',
         success: function(){
             updateTable();
+            successNoty('Deleted');
         }
     })
+}
+
+var failedNote;
+
+function closeNoty() {
+    if(failedNote){
+        failedNote.close();
+        failedNote = undefined;
+    }
+}
+
+function successNoty(text) {
+    closeNoty();
+    noty({
+        text: text,
+        type: 'success',
+        timeout: 2000,
+        layout: 'bottomRight'
+    });
+}
+
+function failNoty(event, jqXHR, options, jsExc) {
+    closeNoty();
+    failedNote = noty({
+        text: 'Failed: ' + jqXHR.statusText + '<br>' + jqXHR.responseText,
+        type: 'error',
+        layout: 'bottomRight'
+    });
 }

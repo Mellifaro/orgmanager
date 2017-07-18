@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS companies CASCADE;
 CREATE SEQUENCE company_seq START 100;
 
 CREATE TABLE companies (
-  id          INTEGER PRIMARY KEY DEFAULT nextval('company_seq'),
+  id          BIGINT PRIMARY KEY DEFAULT nextval('company_seq'),
   name        VARCHAR UNIQUE NOT NULL,
   earnings    BIGINT DEFAULT 0,
   parent_id   INTEGER DEFAULT NULL,

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Виктор on 14.07.2017.
  */
-public interface CompanyRepository extends CrudRepository<Company, Integer>{
+public interface CompanyRepository extends CrudRepository<Company, Long>{
 
-    List<Company> findByParentCompany_Id(Integer id);
+    List<Company> findByParentCompany_Id(Long id);
 }

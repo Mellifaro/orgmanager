@@ -1,24 +1,31 @@
 package com.orgmanager.dto;
 
 import com.orgmanager.models.Company;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * Created by Виктор on 15.07.2017.
  */
-public class CompanyDTO {
+public class CompanyDTO implements Serializable{
+    private static final long serialVersionUID = 4360395719334854364L;
 
-    private Integer id;
+    private Long id;
 
-    @NotEmpty
+    @NotNull
+    @Length(min = 3, max = 50)
     private String name;
 
+    @NotNull
     private Long earnings;
 
-    private Integer parentId;
+    private Long parentId;
 
     public CompanyDTO(){}
 
@@ -28,11 +35,11 @@ public class CompanyDTO {
         this.earnings = company.getEarnings();
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,11 +59,11 @@ public class CompanyDTO {
         this.earnings = earnings;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
@@ -67,19 +74,19 @@ public class CompanyDTO {
 
         CompanyDTO that = (CompanyDTO) o;
 
-        if (!id.equals(that.id)) return false;
-        if (!name.equals(that.name)) return false;
-        if (!earnings.equals(that.earnings)) return false;
-        return parentId.equals(that.parentId);
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (earnings != null ? !earnings.equals(that.earnings) : that.earnings != null) return false;
+        return parentId != null ? parentId.equals(that.parentId) : that.parentId == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + earnings.hashCode();
-        result = 31 * result + parentId.hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (earnings != null ? earnings.hashCode() : 0);
+        result = 31 * result + (parentId != null ? parentId.hashCode() : 0);
         return result;
     }
 }

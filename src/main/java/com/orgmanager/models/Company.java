@@ -15,7 +15,7 @@ public class Company implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -30,11 +30,11 @@ public class Company implements Serializable{
     @OneToMany(mappedBy="parentCompany", fetch = FetchType.EAGER)
     private List<Company> listChildCompanies;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
