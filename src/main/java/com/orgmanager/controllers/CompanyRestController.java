@@ -27,17 +27,18 @@ public class CompanyRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Company getById(@PathVariable("id") int id){
-        return service.find(id);
+    public CompanyDTO getById(@PathVariable("id") int id){
+        Company company =  service.find(id);
+        return new CompanyDTO(company);
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Valid @RequestBody CompanyDTO companyDto){
-//        service.update(companyDto);
+    @RequestMapping(method = RequestMethod.POST)
+    public void update(CompanyDTO companyDto){
+        service.updateFromDto(companyDto);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") int id){
-//        service.delete(id);
+        service.delete(id);
     }
 }

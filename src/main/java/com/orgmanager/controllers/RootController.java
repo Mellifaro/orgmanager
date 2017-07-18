@@ -23,8 +23,6 @@ public class RootController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getAllCompanies(ModelMap model){
-        List<CompanyWithChildrenDTO> companiesList = companyService.findAllParentCompanies();
-        model.put("companyList", companiesList);
         return "companies";
     }
 }

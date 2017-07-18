@@ -1,6 +1,8 @@
 package com.orgmanager.dto;
 
+import com.orgmanager.models.Company;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.Column;
 
@@ -18,6 +20,13 @@ public class CompanyDTO {
 
     private Integer parentId;
 
+    public CompanyDTO(){}
+
+    public CompanyDTO(Company company){
+        this.id = company.getId();
+        this.name = company.getName();
+        this.earnings = company.getEarnings();
+    }
 
     public Integer getId() {
         return id;

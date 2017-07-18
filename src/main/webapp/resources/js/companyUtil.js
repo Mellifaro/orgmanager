@@ -1,28 +1,104 @@
+var form;
+
+$(document).ready(function() {
+    form = $('#detailsForm');
+
+    updateTable();
+    form.submit(function () {
+        save();
+        return false;
+    });
+});
+
+function renderAddChildBtn(parentId){
+    var addChildText = 'Add child company';
+    return '<a class="btn btn-xs btn-primary" onclick="addCompany(' + parentId + ')">Add child</a>';
+    // return '<a class="teal-text" onclick="updateRow(id)"><i class="fa fa-pencil"></i></a>'
+}
+
 function renderEditBtn(id){
-    // return '<a class="btn btn-xs btn-primary" onclick="updateRow(id)">Edit</a>';
-    return '<a class="teal-text" onclick="updateRow(id)"><i class="fa fa-pencil"></i></a>'
+    return '<a class="btn btn-xs btn-primary" onclick="editCompany(' + id + ')">Edit</a>';
+    // return '<a class="teal-text" onclick="updateRow(id)"><i class="fa fa-pencil"></i></a>'
 }
 
 function renderDeleteBtn(id){
-    return '<a class="btn btn-xs btn-danger" onclick="deleteRow(id)">Delete</a>';
+    return '<a class="btn btn-xs btn-danger" onclick="deleteRow(' + id + ')">Delete</a>';
 }
 
 function updateTable() {
-    var table = $('#datatable');
-    var data = $.ajax({
+    var tbody = $('#datatable > tbody');
+    $.ajax({
         type: 'GET',
-        url: 'companies'
+        url: 'rest/companies',
+        success: function (data) {
+            tbody.empty();
+            for(var i = 0, depth = 1; i < data.length; i++){
+                printRaw(data[i], tbody, depth);
+            }
+        },
+        error: function () {
+            alert("error");
+        }
     });
+}
 
-    for(var i = 0; i < data.length; i++){
-        printRaw(data[i], table);
+function printRaw(company, tbody, depth) {
+    var nameWithDepth = '';
+    nameWithDepth = nameWithDepth + '<tr><td>';
+    for(var k = 0; k < depth; k++){
+        nameWithDepth = nameWithDepth + '--';
+    }
+    tbody.append(nameWithDepth + company.name + '</td>'
+                +'<td>' + company.earnings + '</td>'
+                +'<td>' + company.totalEarnings + '</td>'
+                +'<td>' + renderAddChildBtn(company.id) + '</td>'
+                +'<td>' + renderEditBtn(company.id) +'</td>'
+                +'<td>' + renderDeleteBtn(company.id) +'</td>'
+                +'</tr>'
+    );
+    
+    var children = company.listChildCompanies;
+    depth++;
+    for(var j = 0; j < children.length; j++){
+        printRaw(children[j], tbody, depth);
     }
 }
 
-function printRaw(company, table) {
-    // TODO fill table
-    var children = company.listChildCompanies;
-    for(var j = 0; j < children.length; j++){
-        printRaw(children[j]);
-    }
+function addCompany(parentId){
+    $('#detailsForm').find(":input").val("");
+    $('#detailsForm').find("input[name='parentId']").val(parentId);
+    $('#modalTitle').html('Add company');
+    $('#editRow').modal();
+}
+
+function editCompany(id){
+    $('#modalTitle').html('Edit company');
+    $.get('rest/companies/' + id, function (data) {
+        $.each(data, function (key, value) {
+            $('#detailsForm').find("input[name='" + key + "']").val(value);
+        });
+        $('#editRow').modal();
+    });
+}
+
+function save(){
+    $.ajax({
+        type: 'POST',
+        url: 'rest/companies',        
+        data: $('#detailsForm').serialize(),
+        success: function () {
+            $('#editRow').modal('hide');
+            updateTable();
+        }
+    });
+}
+
+function deleteRow(id) {
+    $.ajax({
+        url: 'rest/companies/' + id,
+        type: 'DELETE',
+        success: function(){
+            updateTable();
+        }
+    })
 }

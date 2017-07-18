@@ -10,31 +10,29 @@
 </head>
 
 <body>
-    <a class="btn btn-sm btn-info" onclick="add('Add company')" >Add company</a>
+<div class="jumbotron">
+    <div class="container">
+        <div class="shadow">
+            <div class="view-box">
+                <a class="btn btn-sm btn-info" onclick="addCompany('Add main company')" >Add main company</a>
 
-    <table class="table" id="datatable">
-        <thead>
-            <%--<th>#</th>--%>
-            <th>Name</th>
-            <th>Company Earnings</th>
-            <th>Total Earnings</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </thead>
-        <c:forEach var="node" items="${companyList}">
-            <tr>
-                <td>-${node.name}</td>
-                <td>${node.earnings}</td>
-                <td>0</td>
-                <td><a href="edit/${node.id}">Edit</a></td>
-                <td><a href="delete/${node.id}">Delete</a></td>
-            </tr>
-            <c:set var="node" value="${node}" scope="request"/>
-            <c:set var="depth" value="${0}" scope="request"/>
-            <jsp:include page="element.jsp"/>
-        </c:forEach>
+                <table class="table display" id="datatable">
+                    <thead>
+                        <th>Name</th>
+                        <th>Company Earnings</th>
+                        <th>Total Earnings</th>
+                        <th>Add child company</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </thead>
+                    <tbody>
 
-    </table>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
     <div class="modal fade" id="editRow">
         <div class="modal-dialog">
@@ -46,6 +44,7 @@
                 <div class="modal-body">
                     <form:form class="form-horizontal" method="post" id="detailsForm">
                         <input type="text" hidden="hidden" id="id" name="id">
+                        <input type="text" hidden="hidden" id="parentId" name="parentId">
 
                         <div class="form-group">
                             <label for="name" class="control-label col-xs-3">Name</label>
