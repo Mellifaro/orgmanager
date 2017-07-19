@@ -22,7 +22,6 @@ public class CompanyServiceImpl implements CompanyService{
 
     @Override
     public Company find(Long id) {
-        Company company = repository.findOne(id);
         return repository.findOne(id);
     }
 

@@ -1,9 +1,6 @@
 package com.orgmanager.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -26,6 +23,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = {"com.orgmanager.dao"},
         excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Configuration.class})
 )
+@Import(HerokuConfig.class)
 public class DaoAppConfig {
 
     private static final String[] ENTITY_PACKAGES = {
@@ -45,6 +43,7 @@ public class DaoAppConfig {
     }
 
     @Bean
+    @Profile("local")
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");

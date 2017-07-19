@@ -2,6 +2,9 @@ package com.orgmanager.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
 /**
  * Created by Виктор on 13.07.2017.
  */
@@ -28,4 +31,9 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         return new String[]{"/"};
     }
 
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+        servletContext.setInitParameter("spring.profiles.active", "heroku");
+    }
 }
