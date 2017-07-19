@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title>Structmanager</title>
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
